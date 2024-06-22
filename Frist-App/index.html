@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="css/myStyle.css">
+    <script>
+        const pi=3.14;
+        console.log("pi value is "+ pi);
+        //pi=200; can not change the pi const value 
+        //console.log("pi value is "+ pi);
+        var i=10;
+        console.log('i value is '+i)
+       function sayHi(){
+        alert('Hi');
+       }
+       function sayName(name){
+        document.getElementById("me").innerText=document.getElementById("txtname").value;
+       }
+    </script>
+</head>
+
+<body>
+    <form>
+        <h1 id="me">Hello,Nice to see you</h1>
+        <p>I am learning JavaScript from frondend to backend system development.</p>
+        <button onclick="sayHi()">Hi</button>
+        
+        Type your Name:<input type="text" id="txtname">
+        <button onclick="sayName()">Tell me your name</button>
+    </form>
+
+</body>
+
+</html>

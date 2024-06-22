@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+#game-container {
+  border-left-width: 100px;
+  border-right-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#snooker-table {
+  margin-top: 0.1rem; /* Add some space above the snooker table */
+}
+
+#container-top {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #333333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  flex-grow: 1; /* Grow and take available space */
+  width: 80%; /* Adjust width based on your needs */
+  max-width: 800px; /* Set a maximum width if necessary */
+  margin-top: 2rem; /* Add some space above the snooker table */
+}
+
+#info {
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+
+#info > h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  color: #f0aa28;
+  text-align: center;
+}
+
+#info > ul {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #333333;
+  text-align: left;
+}
+
+#title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #b31566;
+}
+
+#score {
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: #0ff508a7;
+}
+
+#alerts {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vh;
+  font-weight: bold;
+  color: #f02828;
+  background-color: #333333;
+  padding: 5px 20px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+}
