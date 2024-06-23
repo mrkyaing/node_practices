@@ -17,8 +17,10 @@
        function sayHi(){
         alert('Hi');
        }
-       function sayName(name){
-        document.getElementById("me").innerText=document.getElementById("txtname").value;
+       function sayName(){
+        var name=document.getElementById("txtname").value;
+        alert(name)
+        document.getElementById("me").value=name;
        }
     </script>
 </head>
@@ -27,8 +29,7 @@
     <form>
         <h1 id="me">Hello,Nice to see you</h1>
         <p>I am learning JavaScript from frondend to backend system development.</p>
-        <button onclick="sayHi()">Hi</button>
-        
+        <button onclick="sayHi()">Hi</button>        
         Type your Name:<input type="text" id="txtname">
         <button onclick="sayName()">Tell me your name</button>
     </form>

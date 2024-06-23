@@ -1,51 +1,13 @@
-# Betmigs-Snooker-App
+# Introduction
+- During the course so far, we have developed a number of graphics applications using P5js. For this assignment you are tasked with developing a snooker app. You have to draw the snooker table with pockets, lines etc., add the balls and the cue. A standard full-size snooker table measures 12 ft × 6 ft. Here you choose the size of table in pixels, but you should maintain the ratio i.e., table width = table length / 2.
+- The ball size is approximately 2 inches in diameter so you could use the formula below
+ball diameter = table width / 36.
+- The pocket size should be 1.5 times the size of the ball’s diameter. The cue ball is only inserted in the “D” zone. Use the Snooker wiki (https://en.wikipedia.org/wiki/Snooker) for more detailed information so you can complete the table as seen below.
 
-Betmig’s snooker app is a dynamic digital interpretation of traditional snooker, enriched with extended features like a
-dynamic cue system and sound effects, which elevate the standard gameplay experience. This application is tailored to
-attract a broad audience through its engaging gameplay mechanics and various modes.
+# Gaming aspects
+- 1. When the cue ball is in the pocket it should be given back to the player (run step 6 again). A potted cue ball can only be placed back inside the "D" zone
+- 2. If a coloured ball is potted, it should be re-spotted on its designated spot on the table
+- 3. If two consecutive coloured balls fall in the pocket then notify the user of this mistake
 
-# Video Demo
-
-![Betmig'a Snooker App](https://github.com/betmig/Betmigs-Snooker-App/blob/main/snooker-748753_640.jpg)
-# [Demo Video](https://www.youtube.com/watch?v=zXa9lV0MtDE)
-
-## Extensions: Dynamic Cue System and Sound Effects
-
-     - Dynamic Cue System: This extension revolutionizes player interaction. The cue's angle
-     and power dynamically respond to mouse movements, allowing players to simulate realistic 
-     snooker shots. This feature introduces a new level of strategy and skill, enhancing the 
-     traditional browser snooker game.
-
-     - Sound Effects: As an additional extension, sound effects are integrated to create a more
-      immersive environment. These effects, activated during specific actions like ball collisions
-      and pocketing, add auditory depth to the gameplay, bringing the virtual snooker experience
-      closer to reality.
-
-## Game Modes
-
-      - Regular Snooker Setup: Emulates the classic snooker game, perfect for traditionalists seeking
-       the authentic snooker experience.
-      - Red Balls Only: Simplifies the game by focusing solely on potting red balls, making it
-        ideal for beginners or quick play.
-      - Colored and Red Balls: Introduces a mix of colored and red balls for a more challenging 
-        and varied gameplay experience.
-      - Hidden Game Mode: Accessible by pressing the key '4', this hidden mode provides a 
-        unique twist to the game, offering players an unexpected and novel snooker experience.
-
-## Technical and User Experience
-
-     - The game logic needed to be sophisticated enough to handle various scenarios and outcomes
-       based on the rules of snooker.
-       This included managing turns, enforcing rules for fouls, and keeping track of the score.
-       The implementation of the dynamic cue system and sound effects required a deep understanding
-       of the physics involved in the game as well as technical proficiency in programming
-       interactive elements in P5.js and Matter.js.
-
-## Conclusion
-
-      Overall, this snooker game app differentiates itself with its extended features of a dynamic
-      cue system and integrated sound effects, which together enhance the realism and engagement of the game.
-      Coupled with multiple game modes, including a hidden feature, the app caters to a diverse range of players,
-      from beginners to seasoned snooker enthusiasts.
-      The app's blend of realistic gameplay, educational elements, and user-friendly design makes it
-      an attractive and comprehensive digital snooker experience.
+# Commentary
+- Explain the app design: e.g. why you used a mouse-based only cue function - how does it work? The report quality (i.e. language) will also be assessed. Also discuss your extension and why it is a unique idea. Be precise and deliver the information within 500 words. Include this in your main .js file.

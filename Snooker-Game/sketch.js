@@ -37,17 +37,17 @@ let numberOfRedBalls = 15,
   redBallsRemaining = numberOfRedBalls;
 //set the ball color and order 
 let coloredOrder = [
-  "#FFFF00",//yellow-color
-  "#008000",
-  "#964B00",
-  "#0000FF",//green-color
-  "#A020F0",//red
-  "#000000",
+  "#FFFF00",//yellow
+  "#008000",//green
+  "#964B00",//Brown
+  "#0000FF",//blue
+  "#A020F0",//pink
+  "#000000"//black
 ];
 let currentColorIndex = 0,
-alertMessages = [];
+  alertMessages = [];
 
-
+//loading the sounds from dir.
 function preload() {
   // loading the sounds from diractory
   for (let i = 0; i < PLAY_SOUND_TIMES; i++) {
@@ -65,9 +65,7 @@ function setup() {
   // Initialize global table dimensions
   tableWidth = canvasWidth;
   tableHeight = canvasWidth / 2; // Maintain the 2:1 ratio for the snooker table
-
   frameWidth = 10;
-
   let canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent("snooker-table");
 
@@ -81,21 +79,18 @@ function setup() {
   );
 
   drawTable(tableWidth, tableHeight);
-
   drawPockets(pocketDiameter);
 
   // Create Matter.js engine and world
   engine = Matter.Engine.create();
-  world = engine.world; // Initialize 'world' using the global variable
-
+  // Initialize 'world' using the global variable
+  world = engine.world; 
   Matter.Events.on(engine, "collisionStart", handleCollision);
-
   // Disable gravity for top-down view
   engine.world.gravity.y = 0;
   engine.world.gravity.x = 0;
-
+  //func call for createWalls
   createWalls();
-
   // Add a mousePressed event listener to resume audio context (extension)
   canvas.mousePressed(userStartAudio);
 
@@ -121,24 +116,12 @@ function setup() {
   }
 
   // Define properties for colored balls
-  let greenBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#008000"
-  );
-  let brownBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#964B00"
-  );
-  let yellowBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#FFFF00"
-  );
-  let blueBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#0000FF"
-  );
-  let pinkBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#A020F0"
-  );
-  let blackBallProperties = snookerBalls.find(
-    (ball) => ball.color === "#000000"
-  );
+  let greenBallProperties = snookerBalls.find((ball) => ball.color === "#008000");
+  let brownBallProperties = snookerBalls.find((ball) => ball.color === "#964B00");
+  let yellowBallProperties = snookerBalls.find((ball) => ball.color === "#FFFF00");
+  let blueBallProperties = snookerBalls.find((ball) => ball.color === "#0000FF");
+  let pinkBallProperties = snookerBalls.find((ball) => ball.color === "#A020F0");
+  let blackBallProperties = snookerBalls.find((ball) => ball.color === "#000000");
 
   // Calculate positions for colored balls
   let ballsY = dCenterY + 20; // 20 pixels below the baulk line
@@ -150,30 +133,12 @@ function setup() {
   let blackBallY = tableHeight / 2; // Vertically centered
 
   // Store the original positions of the colored balls
-  originalPositionsMap[greenBallProperties.color] = {
-    x: dCenterX,
-    y: ballsY - 70,
-  };
-  originalPositionsMap[brownBallProperties.color] = {
-    x: dCenterX,
-    y: ballsY - 18,
-  };
-  originalPositionsMap[yellowBallProperties.color] = {
-    x: dCenterX,
-    y: ballsY + 30,
-  };
-  originalPositionsMap[blueBallProperties.color] = {
-    x: blueBallX,
-    y: blueBallY,
-  };
-  originalPositionsMap[pinkBallProperties.color] = {
-    x: pinkBallX,
-    y: pinkBallY,
-  };
-  originalPositionsMap[blackBallProperties.color] = {
-    x: blackBallX,
-    y: blackBallY,
-  };
+  originalPositionsMap[greenBallProperties.color] = {x: dCenterX,y: ballsY - 70,};
+  originalPositionsMap[brownBallProperties.color] = {x: dCenterX,y: ballsY - 18,};
+  originalPositionsMap[yellowBallProperties.color] = {x: dCenterX,y: ballsY + 30,};
+  originalPositionsMap[blueBallProperties.color] = {x: blueBallX,y: blueBallY,};
+  originalPositionsMap[pinkBallProperties.color] = {x: pinkBallX,y: pinkBallY,};
+  originalPositionsMap[blackBallProperties.color] = {x: blackBallX,y: blackBallY,};
 
   // Create and add colored balls
   let coloredBalls = [
@@ -195,21 +160,18 @@ function setup() {
   // Place the cue behind the "D" zone
   let cueInitialX = dCenterX - 100;
   let cueInitialY = dCenterY;
-  cue = Matter.Bodies.rectangle(cueInitialX, cueInitialY, cueWidth, cueHeight, {
-    isStatic: true,
-  });
+  cue = Matter.Bodies.rectangle(cueInitialX, cueInitialY, cueWidth, cueHeight, {isStatic: true,});
 
   // Add the cue to the world
   Matter.World.add(world, cue);
-
   createPocketsAsSensors(world); // Pass the global 'world' variable
-
   setupCollisionHandling(engine);
 
   let runner = Matter.Runner.create();
   Matter.Runner.run(runner, engine);
 }//end of Setup function
 
+//placing the Cue Ball on the Table that user's wanted position
 function placeCueBall() {
   let cueBallRadius = tableWidth / 100;//set the cub ball size
   let newCueBall = createCueBall(mouseX, mouseY, cueBallRadius);
@@ -227,10 +189,7 @@ function updateScore(newScore) {
     score = newScore;
     document.getElementById("score").textContent = "Score: " + score;
   } else {
-    console.error(
-      "Attempted to update score with a non-numeric value.",
-      newScore
-    );
+    console.error("Attempted to update score with a non-numeric value.",newScore);
   }
 }
 
@@ -243,7 +202,7 @@ function updateScoreForPocketedBall(ball) {
     console.error("Invalid ball value encountered:", ball.ballValue);
   }
 }
-//creating the tavble Walls and set the color
+//creating the table Walls and set the color
 function createWalls() {
   let wallThickness = 20;
   let wallColor = "#FF0000";
@@ -332,12 +291,8 @@ function createPocketsAsSensors(world) {
   let pocketPositions = [
     { x: frameWidth + pocketRadius, y: frameWidth + pocketRadius }, // Top-left
     { x: tableWidth - frameWidth - pocketRadius, y: frameWidth + pocketRadius }, // Top-right
-    {
-      x: frameWidth + pocketRadius, y: tableHeight - frameWidth - pocketRadius,
-    }, // Bottom-left
-    {
-      x: tableWidth - frameWidth - pocketRadius, y: tableHeight - frameWidth - pocketRadius,
-    }, // Bottom-right
+    {x: frameWidth + pocketRadius, y: tableHeight - frameWidth - pocketRadius,}, // Bottom-left
+    {x: tableWidth - frameWidth - pocketRadius, y: tableHeight - frameWidth - pocketRadius,}, // Bottom-right
     { x: tableWidth / 2, y: frameWidth + pocketRadius }, // Middle-top
     { x: tableWidth / 2, y: tableHeight - frameWidth - pocketRadius }, // Middle-bottom
   ];
@@ -353,7 +308,7 @@ function createPocketsAsSensors(world) {
     pockets.push(pocket);
   }
 }
-
+//draw the Snooker table
 function drawTable(tableWidth, tableHeight) {
   // Set the wooden frame properties
   let frameWidth = 25;
@@ -468,13 +423,13 @@ function drawCue() {
 
     if (isDraggingCue) {
       // Calculate the angle from the mouse to the cue ball and add 45 degrees
-      cueAngle =atan2(cueBall.position.y - mouseY, cueBall.position.x - mouseX) + PI;
+      cueAngle = atan2(cueBall.position.y - mouseY, cueBall.position.x - mouseX) + PI;
 
       // Set the base of the cue at the mouse cursor
       translate(mouseX, mouseY);
     } else {
       // Calculate the angle from the cue ball to the mouse
-      cueAngle =atan2(cueBall.position.y - mouseY, cueBall.position.x - mouseX) +PI +300;
+      cueAngle = atan2(cueBall.position.y - mouseY, cueBall.position.x - mouseX) + PI + 300;
       // Set the base of the cue at the cue ball
       translate(cueBall.position.x, cueBall.position.y);
     }
@@ -583,7 +538,6 @@ function handleCollision(event) {
 
       // Handle cue ball pocketing separately
       if (ball === cueBall) {
-        displayPowerLevel();
         handleCueBallPocketing();
       } else if (ball.label === "snookerBall") {
         handleOtherBallPocketing(ball);
@@ -600,9 +554,7 @@ function handleCueBallPocketing() {
   updateScore(score);
 
   // Display the alert message
-  displayAlert(
-    "❌ Oh God!!:🤦🏾‍♂️ The cue ball's pocketed.The score -1 effect. Retry again 😎!"
-  );
+  displayAlert("❌ Oh God!!:🤦🏾‍♂️ The cue ball's pocketed.The score -1 effect. Retry again 😎!");
 }
 
 function removeFromGame(ball) {
@@ -729,6 +681,7 @@ function keyPressed() {
     //set the random red balls
     switchToMode(2);
   } else if (key === "3") {
+    //set the random all balls
     switchToMode(3);
   } else if (key === "4") {
     switchToMode(4);
@@ -903,9 +856,7 @@ function handleOtherBallPocketing(ball) {
         removeFromGame(ball);
       } else {
         let nextColorName = getColorName(coloredOrder[currentColorIndex]);
-        displayAlert(
-          `❌ Um: 🤦🏽‍♂️ You should've sunk the ${nextColorName} ball.`
-        );
+        displayAlert(`❌ Um: 🤦🏽‍♂️ You should've sunk the ${nextColorName} ball.`);
         updateScore(score - 4);
         removeFromGame(ball);
       }
@@ -921,9 +872,7 @@ function handleOtherBallPocketing(ball) {
     else {
       // If red balls are still remaining
       if (redBallsRemaining > 0) {
-        displayAlert(
-          `❌ Um: ☹ You've nipped a coloured ball out of turn!`
-        );
+        displayAlert(`❌ Um: ☹ You've nipped a coloured ball out of turn!`);
         updateScore(score - 4);
         returnColoredBall(ball);
       }
@@ -936,15 +885,13 @@ function handleOtherBallPocketing(ball) {
           removeFromGame(ball);
         } else {
           let nextColorName = getColorName(coloredOrder[currentColorIndex]);
-          displayAlert(
-            `❌ Um: 🤦🏽‍♂️ You should've sunk the ${nextColorName} ball, ya muppet!`
+          displayAlert(`❌ Um: 🤦🏽‍♂️ You should've sunk the ${nextColorName} ball!`
           );
           updateScore(score - 4);
           returnColoredBall(ball);
         }
       }
     }
-
     updateScore(score);
   }
 }
@@ -991,12 +938,9 @@ document.getElementById("score").textContent = "🚀 Score: " + score + " 🚀 "
 function updateScore(newScore) {
   if (!isNaN(newScore) && typeof newScore === "number") {
     score = newScore;
-    document.getElementById("score").textContent =
-      " 🚀 Score: " + score + " 🚀 ";
+    document.getElementById("score").textContent =" 🚀 Score: " + score + " 🚀 ";
   } else {
-    console.error(
-      "Attempted to update score with a non-numeric value",
-      newScore
+    console.error("Attempted to update score with a non-numeric value",newScore
     );
   }
 }
@@ -1090,8 +1034,9 @@ function setupColoredBallsMode() {
   });
 }
 
-const MAX_MESSAGES = 4; // Maximum number of messages to display
+const MAX_MESSAGES = 5; // Maximum number of messages to display
 
+//set the alert message with current local time
 function displayAlert(message) {
   const timestamp = new Date().toLocaleTimeString();
   const formattedMessage = `<strong>${timestamp}</strong>: ${message}`;
@@ -1102,12 +1047,13 @@ function displayAlert(message) {
   }
 
   updateAlertsDisplay();
+  //show the alert message within 2 seconds
   setTimeout(() => {
     alertMessages = alertMessages.filter((msg) => msg !== formattedMessage);
     updateAlertsDisplay();
   }, 20000);
 }
-
+//display the message to the div alerts tag for index.html
 function updateAlertsDisplay() {
   const alertsDiv = document.getElementById("alerts");
   const messagesToDisplay = alertMessages.slice(-MAX_MESSAGES);
