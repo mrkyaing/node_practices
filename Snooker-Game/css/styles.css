@@ -88,9 +88,12 @@ body {
   font-size: 2vh;
   font-weight: bold;
   color: #f02828;
-  background-color: #333333;
+  background-color: #daf107;
   padding: 5px 20px;
   border-radius: 20px;
   text-align: center;
   font-weight: bold;
+}
+ul li{
+  list-style: none;
 }
